@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Buddy Wireframe</title>
+    <style>
+      :root {
+        --bg: #f3f3f3;
+        --panel: #ececec;
+        --panel-strong: #dddddd;
+        --panel-dark: #cfcfcf;
+        --stroke: #8d8d8d;
+        --text: #2c2c2c;
+        --muted: #707070;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .wireframe {
+        border: 3px solid var(--stroke);
+        background: #f7f7f7;
+        min-height: 900px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 24px;
+        border-bottom: 3px solid var(--stroke);
+        background: #efefef;
+      }
+
+      .brand {
+        width: 180px;
+        height: 36px;
+        border: 3px solid var(--stroke);
+        background: var(--panel);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+
+      .nav {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .nav-item {
+        min-width: 98px;
+        height: 36px;
+        border: 3px solid var(--stroke);
+        background: var(--panel);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
+
+      .auth {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .button {
+        min-width: 90px;
+        height: 38px;
+        border: 3px solid var(--stroke);
+        background: var(--panel);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 24px;
+        padding: 26px 24px 18px;
+        border-bottom: 3px solid var(--stroke);
+      }
+
+      .hero-copy {
+        padding: 20px 18px;
+        border: 3px solid var(--stroke);
+        background: #f0f0f0;
+      }
+
+      .eyebrow {
+        width: 140px;
+        height: 18px;
+        margin-bottom: 18px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-strong);
+      }
+
+      h1 {
+        margin: 0 0 16px;
+        font-size: clamp(28px, 4vw, 58px);
+        line-height: 1.05;
+        letter-spacing: -0.05em;
+        max-width: 620px;
+      }
+
+      .heading-box {
+        width: 100%;
+        height: 18px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-strong);
+        margin-bottom: 10px;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        margin-top: 28px;
+        flex-wrap: wrap;
+      }
+
+      .cta {
+        min-width: 160px;
+        height: 54px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+
+      .secondary {
+        background: var(--panel);
+      }
+
+      .hero-visual {
+        border: 3px solid var(--stroke);
+        background: #f0f0f0;
+        min-height: 260px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mock-illustration {
+        width: 90%;
+        height: 200px;
+        border: 3px solid var(--stroke);
+        background: linear-gradient(180deg, #e3e3e3 0%, #d0d0d0 100%);
+        position: relative;
+      }
+
+      .mock-illustration::before,
+      .mock-illustration::after {
+        content: "";
+        position: absolute;
+        border: 3px solid var(--stroke);
+        background: #dedede;
+      }
+
+      .mock-illustration::before {
+        width: 130px;
+        height: 110px;
+        left: 30px;
+        top: 26px;
+      }
+
+      .mock-illustration::after {
+        width: 180px;
+        height: 72px;
+        right: 30px;
+        bottom: 26px;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        padding: 22px 24px;
+        border-bottom: 3px solid var(--stroke);
+      }
+
+      .feature-box {
+        border: 3px solid var(--stroke);
+        background: #f0f0f0;
+        min-height: 170px;
+        padding: 16px;
+      }
+
+      .feature-icon {
+        width: 52px;
+        height: 52px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-strong);
+        margin-bottom: 18px;
+      }
+
+      .feature-line {
+        width: 80%;
+        height: 16px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-strong);
+        margin-bottom: 10px;
+      }
+
+      .feature-line.short { width: 55%; }
+
+      .main-content {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 22px;
+        padding: 22px 24px 28px;
+      }
+
+      .left-column, .right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .panel {
+        border: 3px solid var(--stroke);
+        background: #f0f0f0;
+        padding: 18px;
+      }
+
+      .panel-title {
+        width: 140px;
+        height: 18px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-strong);
+        margin-bottom: 16px;
+      }
+
+      .list-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .dot {
+        width: 18px;
+        height: 18px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-strong);
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .list-line {
+        flex: 1;
+        height: 16px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-strong);
+      }
+
+      .chat-shell {
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .chat-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .chat-title {
+        width: 170px;
+        height: 18px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-strong);
+      }
+
+      .chat-actions {
+        width: 110px;
+        height: 32px;
+        border: 3px solid var(--stroke);
+        background: var(--panel);
+      }
+
+      .messages {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .bubble {
+        max-width: 72%;
+        min-height: 54px;
+        border: 3px solid var(--stroke);
+        background: var(--panel);
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+      }
+
+      .bubble.user {
+        align-self: flex-end;
+        background: #e0e0e0;
+      }
+
+      .bubble.ai {
+        align-self: flex-start;
+      }
+
+      .prompt-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+
+      .chip {
+        min-width: 120px;
+        height: 36px;
+        border: 3px solid var(--stroke);
+        background: var(--panel);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+      }
+
+      .composer {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .input-box {
+        flex: 1;
+        min-height: 56px;
+        border: 3px solid var(--stroke);
+        background: #f7f7f7;
+      }
+
+      .send-button {
+        width: 110px;
+        height: 56px;
+        border: 3px solid var(--stroke);
+        background: var(--panel-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .features,
+        .main-content {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar {
+          flex-direction: column;
+          gap: 12px;
+          align-items: flex-start;
+        }
+
+        .nav,
+        .auth {
+          width: 100%;
+          justify-content: flex-start;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .page {
+          padding: 12px;
+        }
+
+        .topbar,
+        .hero,
+        .features,
+        .main-content {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+
+        .nav {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(120px, 1fr));
+          width: 100%;
+        }
+
+        .bubble {
+          max-width: 88%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="wireframe">
+        <header class="topbar">
+          <div class="brand">BRAND</div>
+          <nav class="nav" aria-label="Main navigation">
+            <div class="nav-item">Home</div>
+            <div class="nav-item">Features</div>
+            <div class="nav-item">Pricing</div>
+            <div class="nav-item">About</div>
+          </nav>
+          <div class="auth">
+            <div class="button">Log in</div>
+            <div class="button">Sign up</div>
+          </div>
+        </header>
+
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"></div>
+            <h1>AI study assistant for focused learning.</h1>
+            <div class="heading-box"></div>
+            <div class="heading-box"></div>
+            <div class="heading-box" style="width: 74%;"></div>
+
+            <div class="hero-actions">
+              <div class="cta">Get started</div>
+              <div class="cta secondary">View demo</div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="mock-illustration" aria-label="Product illustration placeholder"></div>
+          </div>
+        </section>
+
+        <section class="features">
+          <div class="feature-box">
+            <div class="feature-icon"></div>
+            <div class="feature-line"></div>
+            <div class="feature-line short"></div>
+            <div class="feature-line"></div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon"></div>
+            <div class="feature-line"></div>
+            <div class="feature-line short"></div>
+            <div class="feature-line"></div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon"></div>
+            <div class="feature-line"></div>
+            <div class="feature-line short"></div>
+            <div class="feature-line"></div>
+          </div>
+        </section>
+
+        <section class="main-content">
+          <div class="left-column">
+            <div class="panel">
+              <div class="panel-title"></div>
+              <div class="list-item">
+                <span class="dot"></span>
+                <span class="list-line"></span>
+              </div>
+              <div class="list-item">
+                <span class="dot"></span>
+                <span class="list-line"></span>
+              </div>
+              <div class="list-item">
+                <span class="dot"></span>
+                <span class="list-line"></span>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-title"></div>
+              <div class="list-item">
+                <span class="dot"></span>
+                <span class="list-line"></span>
+              </div>
+              <div class="list-item">
+                <span class="dot"></span>
+                <span class="list-line"></span>
+              </div>
+              <div class="list-item">
+                <span class="dot"></span>
+                <span class="list-line"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-column">
+            <div class="panel chat-shell">
+              <div class="chat-header">
+                <div class="chat-title"></div>
+                <div class="chat-actions"></div>
+              </div>
+
+              <div class="messages">
+                <div class="bubble user">User message placeholder</div>
+                <div class="bubble ai">AI response placeholder</div>
+                <div class="bubble user">Follow-up question placeholder</div>
+                <div class="bubble ai">Helpful answer placeholder</div>
+              </div>
+
+              <div class="prompt-row">
+                <div class="chip">Explain simply</div>
+                <div class="chip">Study plan</div>
+                <div class="chip">Break it down</div>
+              </div>
+
+              <div class="composer">
+                <div class="input-box"></div>
+                <div class="send-button">Send</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
