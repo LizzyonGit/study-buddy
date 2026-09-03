@@ -30,17 +30,28 @@ Tech
 - App structure: a server-rendered page with a small interactive client component for the chat input and message state.
 - Storage: None for MVP (in-memory per page). Optional DB only if persistence needed.
 
+Visual Design & Accessibility
+- Use an OKLCH-based color system so the palette is easy to adjust consistently.
+- Primary accent: blue for the main interactive actions and active states.
+- Secondary accent: purple for supporting highlights and assistant-related accents.
+- Contrast color: near-black for primary text, icons, and high-contrast controls.
+- Use light neutral backgrounds so blue, purple, and black remain visually distinct.
+- Meet WCAG 2.2 AA contrast targets: at least 4.5:1 for normal text, 3:1 for large text, and 3:1 for meaningful non-text UI boundaries and focus indicators.
+- Verify text, buttons, input borders, focus states, disabled states, and message bubbles with a contrast checker before release.
+- Do not communicate meaning through color alone; preserve readable labels and visible focus states.
+
 3-Week Timeline
 - Week 1 — Setup & UI (Days 1–7)
   - Scaffold Next.js project and install deps.
   - Build single-page chat UI: message list, input, send button.
+  - Define the OKLCH blue, purple, near-black, neutral, border, and focus tokens.
   - Local env var setup (e.g., `.env.local`).
 - Week 2 — API Integration (Days 8–14)
   - Implement a Next.js server action or route handler that calls Groq securely (errors, timeouts, and API validation handled).
   - Wire the chat client to the server endpoint; show loading state and bot responses.
   - Add basic logging and env validation for Groq key and request failures.
 - Week 3 — Polish, Tests, Deploy (Days 15–21)
-  - Add retry/error UX, styling, accessibility fixes.
+  - Add retry/error UX, styling, accessibility fixes, and WCAG contrast verification.
   - Add minimal tests for API route and UI flow.
   - readme
 

@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #233044;
-  --muted: #758092;
-  --paper: #f7f3eb;
-  --panel: #fffdf8;
-  --line: #e5dfd2;
-  --accent: #da6d4b;
-  --accent-dark: #b94e32;
-  --blue: #dce8ee;
+  --ink: oklch(0.2 0.03 260);
+  --muted: oklch(0.4 0.04 260);
+  --paper: oklch(0.97 0.012 260);
+  --panel: oklch(0.995 0.004 260);
+  --line: oklch(0.62 0.03 260);
+  --blue: oklch(0.48 0.19 255);
+  --blue-dark: oklch(0.37 0.16 255);
+  --focus: oklch(0.37 0.16 255);
+  --purple: oklch(0.93 0.06 305);
+  --purple-dark: oklch(0.43 0.18 305);
 }
 
 @theme inline {
@@ -42,8 +44,8 @@ button {
   min-height: 100vh;
   padding: 48px 24px;
   background-color: var(--paper);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.7), transparent 55%),
-    repeating-linear-gradient(0deg, rgba(35, 48, 68, 0.025) 0, rgba(35, 48, 68, 0.025) 1px, transparent 1px, transparent 5px);
+  background-image: linear-gradient(135deg, oklch(1 0 0 / 0.7), transparent 55%),
+    repeating-linear-gradient(0deg, oklch(0.2 0.03 260 / 0.025) 0, oklch(0.2 0.03 260 / 0.025) 1px, transparent 1px, transparent 5px);
 }
 
 .chat-shell {
@@ -55,7 +57,7 @@ button {
   overflow: hidden;
   background: var(--panel);
   border: 1px solid var(--line);
-  box-shadow: 12px 14px 0 rgba(218, 109, 75, 0.12);
+  box-shadow: 12px 14px 0 oklch(0.48 0.19 255 / 0.14);
 }
 
 .chat-header {
@@ -73,7 +75,7 @@ button {
   flex: 0 0 auto;
   place-items: center;
   color: white;
-  background: var(--accent);
+  background: var(--blue);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -81,7 +83,7 @@ button {
 
 .eyebrow {
   margin: 0 0 2px;
-  color: var(--accent-dark);
+  color: var(--purple-dark);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -105,8 +107,8 @@ h1 {
 }
 
 .clear-button:hover:not(:disabled) {
-  color: var(--accent-dark);
-  border-color: var(--accent);
+  color: var(--purple-dark);
+  border-color: var(--purple-dark);
 }
 
 .clear-button:disabled {
@@ -153,12 +155,13 @@ h1 {
 }
 
 .assistant .message-bubble {
-  background: var(--blue);
+  color: var(--ink);
+  background: var(--purple);
 }
 
 .user .message-bubble {
   color: white;
-  background: var(--accent);
+  background: var(--blue);
 }
 
 .composer {
@@ -180,21 +183,21 @@ h1 {
 }
 
 .composer input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(218, 109, 75, 0.12);
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px var(--focus);
 }
 
 .composer button {
   width: 49px;
   flex: 0 0 49px;
   color: white;
-  background: var(--accent);
+  background: var(--blue);
   border: 0;
   font-size: 22px;
 }
 
 .composer button:hover {
-  background: var(--accent-dark);
+  background: var(--blue-dark);
 }
 
 .composer-note {
@@ -224,6 +227,12 @@ h1 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .message-row {
+    animation: none;
   }
 }
 
@@ -257,30 +266,4 @@ h1 {
   .message-row {
     max-width: 88%;
   }
-}
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
