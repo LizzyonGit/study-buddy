@@ -24,7 +24,7 @@ describe("ChatInterface", () => {
     render(<ChatInterface />);
 
     await user.type(
-      screen.getByPlaceholderText("What are you studying today?"),
+      screen.getByPlaceholderText("Ask away!"),
       "Explain photosynthesis",
     );
     await user.click(screen.getByRole("button", { name: "Send message" }));

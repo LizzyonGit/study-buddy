@@ -2,7 +2,7 @@
 "use client";
 
 // FormEvent provides the TypeScript type for the form submit event; useState stores changing UI data.
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 // A message has an id for React's list rendering, a role for styling and labels, and visible text.
 type Message = {
@@ -16,7 +16,7 @@ const welcomeMessage: Message = {
   id: 0,
   role: "assistant",
   content:
-    "Hi, I’m Study Buddy. Ask me anything you’re learning, and we’ll work through it together.",
+    "Hi, I’m Study Buddy. How can I help you learn today?",
 };
 
 export default function ChatInterface() {
@@ -24,13 +24,13 @@ export default function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
   // Store the current value typed into the input field.
   const [input, setInput] = useState("");
-  // Track whether a request is in progress so duplicate requests can be prevented.
+  // Track whether a request is in progress so duplicate requests can be prevented and Loading can be displayed.
   const [isLoading, setIsLoading] = useState(false);
   // Store a user-safe error message to display when the request fails.
   const [error, setError] = useState("");
 
   // Submit the user's question to the server and add the returned answer to the conversation.
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     // Stop the browser from reloading the page during form submission.
     event.preventDefault();
     // Remove leading and trailing whitespace before validating or sending the question.
@@ -104,6 +104,7 @@ export default function ChatInterface() {
             className="clear-button"
             type="button"
             onClick={clearConversation}
+            /*disables button when only welcome message is there or is loading*/
             disabled={messages.length === 1 || isLoading}
           >
             Clear
@@ -143,7 +144,7 @@ export default function ChatInterface() {
             type="text"
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            placeholder="What are you studying today?"
+            placeholder="Ask away!"
             autoComplete="off"
             disabled={isLoading}
           />
