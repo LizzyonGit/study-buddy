@@ -59,7 +59,7 @@ export default function ChatInterface() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: content }),
       });
-      // Parse the server response as unknown so it must be validated before use.
+      // Parse the server response as unknown so it must be validated before use. The respons from Groq goes here
       const data: unknown = await response.json();
 
       // Treat HTTP errors and unexpected response shapes as failed requests.
