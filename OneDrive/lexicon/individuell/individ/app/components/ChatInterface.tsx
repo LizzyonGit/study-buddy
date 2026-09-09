@@ -28,13 +28,15 @@ export default function ChatInterface() {
   const [isLoading, setIsLoading] = useState(false);
   // Store a user-safe error message to display when the request fails.
   const [error, setError] = useState("");
+  // Keep the last submitted message so the existing Send button can retry it after a failure.
+  const [lastSubmittedMessage, setLastSubmittedMessage] = useState("");
 
   // Submit the user's question to the server and add the returned answer to the conversation.
   async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     // Stop the browser from reloading the page during form submission.
     event.preventDefault();
     // Remove leading and trailing whitespace before validating or sending the question.
-    const content = input.trim();
+    const content = (error ? lastSubmittedMessage : input).trim();
 
     // Ignore blank questions and prevent another request while one is already running.
     if (!content || isLoading) {
@@ -49,6 +51,7 @@ export default function ChatInterface() {
     // Empty the input and clear any old error before starting a new request.
     setInput("");
     setError("");
+    setLastSubmittedMessage(content);
     // Switch the interface into its loading state.
     setIsLoading(true);
 
@@ -148,7 +151,7 @@ export default function ChatInterface() {
             autoComplete="off"
             disabled={isLoading}
           />
-          <button type="submit" aria-label="Send message" disabled={isLoading}>
+          <button type="submit" aria-label={error ? "Try again" : "Send message"} disabled={isLoading}>
             <span aria-hidden="true">&#8593;</span>
           </button>
         </form>

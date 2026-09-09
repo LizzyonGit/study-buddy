@@ -114,5 +114,29 @@ describe("ChatInterface", () => {
     expect(
       await screen.findByText("Unable to get a response right now."),
     ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Try again" })).toBeInTheDocument();
+  });
+
+  it("retries the last message with the existing send button", async () => {
+    const user = userEvent.setup();
+    const fetchMock = vi.spyOn(global, "fetch");
+    fetchMock
+      .mockResolvedValueOnce(new Response(JSON.stringify({ error: "Try again" }), { status: 500 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ message: "Recovered response" }), { status: 200 }));
+
+    render(<ChatInterface />);
+
+    await user.type(screen.getByPlaceholderText("Ask away!"), "Retry this");
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+    await screen.findByRole("button", { name: "Try again" });
+    await user.click(screen.getByRole("button", { name: "Try again" }));
+
+    expect(await screen.findByText("Recovered response")).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(fetchMock).toHaveBeenLastCalledWith("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "Retry this" }),
+    });
   });
 });
