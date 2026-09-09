@@ -2,7 +2,7 @@
 "use client";
 
 // FormEvent provides the TypeScript type for the form submit event; useState stores changing UI data.
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // A message has an id for React's list rendering, a role for styling and labels, and visible text.
 type Message = {
@@ -20,6 +20,8 @@ const welcomeMessage: Message = {
 };
 
 export default function ChatInterface() {
+  // Reference an invisible element at the bottom of the conversation for automatic scrolling.
+  const bottomOfMessagesRef = useRef<HTMLDivElement>(null);
   // Store all displayed messages, starting with the welcome message.
   const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
   // Store the current value typed into the input field.
@@ -30,6 +32,11 @@ export default function ChatInterface() {
   const [error, setError] = useState("");
   // Keep the last submitted message so the existing Send button can retry it after a failure.
   const [lastSubmittedMessage, setLastSubmittedMessage] = useState("");
+
+  // Move the conversation to its newest content whenever messages or loading feedback changes.
+  useEffect(() => {
+    bottomOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
 
   // Submit the user's question to the server and add the returned answer to the conversation.
   async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
@@ -134,6 +141,8 @@ export default function ChatInterface() {
               </p>
             </article>
           )}
+          {/* This invisible anchor gives the list a stable target for automatic scrolling. */}
+          <div ref={bottomOfMessagesRef} aria-hidden="true" />
         </div>
 
         {/* The form supports both clicking Send and pressing Enter in the input. */}

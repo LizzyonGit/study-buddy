@@ -6,6 +6,7 @@ import ChatInterface from "./ChatInterface";
 describe("ChatInterface", () => {
   beforeEach(() => {
     vi.restoreAllMocks();
+    Element.prototype.scrollIntoView = vi.fn();
   });
 
   afterEach(() => {
@@ -37,6 +38,23 @@ describe("ChatInterface", () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: "Explain photosynthesis" }),
+    });
+  });
+
+  it("scrolls to the newest conversation content", async () => {
+    const user = userEvent.setup();
+    vi.spyOn(global, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ message: "A new answer" }), { status: 200 }),
+    );
+
+    render(<ChatInterface />);
+
+    await user.type(screen.getByPlaceholderText("Ask away!"), "New question");
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+    await screen.findByText("A new answer");
+
+    expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({
+      behavior: "smooth",
     });
   });
 
