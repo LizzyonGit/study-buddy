@@ -55,6 +55,7 @@ describe("ChatInterface", () => {
 
     expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({
       behavior: "smooth",
+      block: "start",
     });
   });
 
@@ -74,7 +75,7 @@ describe("ChatInterface", () => {
     render(<ChatInterface />);
 
     await user.type(
-      screen.getByPlaceholderText("What are you studying today?"),
+      screen.getByPlaceholderText("Ask away!"),
       "Test message",
     );
     await user.click(screen.getByRole("button", { name: "Send message" }));
@@ -82,7 +83,7 @@ describe("ChatInterface", () => {
 
     expect(screen.queryByText("Test message")).not.toBeInTheDocument();
     expect(
-      screen.getByText(/Ask me anything you’re learning/),
+      screen.getByText(/How can I help you learn today/),
     ).toBeInTheDocument();
   });
 
@@ -99,7 +100,7 @@ describe("ChatInterface", () => {
     render(<ChatInterface />);
 
     await user.type(
-      screen.getByPlaceholderText("What are you studying today?"),
+      screen.getByPlaceholderText("Ask away!"),
       "Hello",
     );
     await user.click(screen.getByRole("button", { name: "Send message" }));
@@ -124,7 +125,7 @@ describe("ChatInterface", () => {
     render(<ChatInterface />);
 
     await user.type(
-      screen.getByPlaceholderText("What are you studying today?"),
+      screen.getByPlaceholderText("Ask away!"),
       "Hello",
     );
     await user.click(screen.getByRole("button", { name: "Send message" }));

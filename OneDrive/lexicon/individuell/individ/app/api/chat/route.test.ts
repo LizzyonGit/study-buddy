@@ -6,13 +6,15 @@ const { createCompletion } = vi.hoisted(() => ({
 }));
 
 vi.mock("groq-sdk", () => ({
-  default: vi.fn().mockImplementation(() => ({
+  default: vi.fn().mockImplementation(function MockGroq() {
+    return {
     chat: {
       completions: {
         create: createCompletion,
       },
     },
-  })),
+    };
+  }),
 }));
 
 describe("POST /api/chat", () => {

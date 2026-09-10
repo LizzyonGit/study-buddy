@@ -40,6 +40,7 @@ Visual Design & Accessibility
 - Verify text, buttons, input borders, focus states, disabled states, and message bubbles with a contrast checker before release.
 - Do not communicate meaning through color alone; preserve readable labels and visible focus states.
 
+
 3-Week Timeline
 - Week 1 — Setup & UI (Days 1–7)
   - Scaffold Next.js project and install deps.
@@ -69,3 +70,11 @@ Next Step Options
 - Scaffold the Next.js repo and implement Week 1 items.
 
 (Prepared by assistant)
+
+new styling:
+- rounded corners, more modern look
+- Clear button should be floating on the site so it is always visible. 
+- scrolling to a new answer should go to the start of the response message.
+- change the SB logo to logo.png in docs folder
+- make logo.png to a favicon
+

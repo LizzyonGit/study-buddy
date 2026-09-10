@@ -3,6 +3,7 @@
 
 // FormEvent provides the TypeScript type for the form submit event; useState stores changing UI data.
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 // A message has an id for React's list rendering, a role for styling and labels, and visible text.
 type Message = {
@@ -20,8 +21,8 @@ const welcomeMessage: Message = {
 };
 
 export default function ChatInterface() {
-  // Reference an invisible element at the bottom of the conversation for automatic scrolling.
-  const bottomOfMessagesRef = useRef<HTMLDivElement>(null);
+  // Reference the newest assistant message so responses can scroll into view from their start.
+  const latestAssistantMessageRef = useRef<HTMLElement>(null);
   // Store all displayed messages, starting with the welcome message.
   const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
   // Store the current value typed into the input field.
@@ -33,10 +34,15 @@ export default function ChatInterface() {
   // Keep the last submitted message so the existing Send button can retry it after a failure.
   const [lastSubmittedMessage, setLastSubmittedMessage] = useState("");
 
-  // Move the conversation to its newest content whenever messages or loading feedback changes.
+  // Scroll to the start of a new assistant response without hiding its opening context.
   useEffect(() => {
-    bottomOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isLoading]);
+    if (messages.at(-1)?.role === "assistant") {
+      latestAssistantMessageRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [messages]);
 
   // Submit the user's question to the server and add the returned answer to the conversation.
   async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
@@ -103,29 +109,41 @@ export default function ChatInterface() {
     <main className="chat-page">
       <section className="chat-shell" aria-label="Study Buddy chat">
         <header className="chat-header">
-          <div className="brand-mark" aria-hidden="true">
-            SB
-          </div>
+          <Image
+            className="brand-mark"
+            src="/logo.png"
+            alt="Study Buddy logo"
+            width={46}
+            height={46}
+            priority
+          />
           <div>
             <p className="eyebrow">Your learning companion</p>
             <h1>Study Buddy</h1>
           </div>
-          <button
-            className="clear-button"
-            type="button"
-            onClick={clearConversation}
-            /*disables button when only welcome message is there or is loading*/
-            disabled={messages.length === 1 || isLoading}
-          >
-            Clear
-          </button>
         </header>
 
         {/* aria-live lets assistive technology announce newly added messages. */}
         <div className="message-list" aria-live="polite">
+          <button
+            className="clear-button"
+            type="button"
+            onClick={clearConversation}
+            disabled={messages.length === 1 || isLoading}
+          >
+            Clear
+          </button>
           {/* Render every stored message with styling based on its role. */}
-          {messages.map((message) => (
-            <article className={`message-row ${message.role}`} key={message.id}>
+          {messages.map((message, index) => (
+            <article
+              className={`message-row ${message.role}`}
+              key={message.id}
+              ref={
+                message.role === "assistant" && index === messages.length - 1
+                  ? latestAssistantMessageRef
+                  : undefined
+              }
+            >
               <div className="message-label">
                 {message.role === "assistant" ? "Study Buddy" : "You"}
               </div>
@@ -141,8 +159,6 @@ export default function ChatInterface() {
               </p>
             </article>
           )}
-          {/* This invisible anchor gives the list a stable target for automatic scrolling. */}
-          <div ref={bottomOfMessagesRef} aria-hidden="true" />
         </div>
 
         {/* The form supports both clicking Send and pressing Enter in the input. */}
