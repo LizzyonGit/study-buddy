@@ -170,7 +170,6 @@ export default function ChatInterface() {
             {error}
           </p>
         )}
-        <p className="composer-note">Your message will appear here first.</p>
       </section>
     </main>
   );
