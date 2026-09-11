@@ -111,6 +111,20 @@ describe("ChatInterface", () => {
     expect(screen.queryByText("You")).not.toBeInTheDocument();
   });
 
+  it("reveals the Study Buddy explanation when opened", async () => {
+    const user = userEvent.setup();
+
+    render(<ChatInterface />);
+
+    const explanation = screen.getByText(/Study Buddy is an AI chatbot/);
+    expect(explanation).not.toBeVisible();
+
+    await user.click(screen.getByText("What is Study Buddy?"));
+
+    expect(explanation).toBeVisible();
+    expect(explanation).toHaveTextContent("No data will be stored.");
+  });
+
   it("clears submitted messages and keeps the welcome message", async () => {
     const user = userEvent.setup();
 
