@@ -41,6 +41,48 @@ describe("ChatInterface", () => {
     });
   });
 
+  it("renders Markdown in assistant responses", async () => {
+    const user = userEvent.setup();
+    vi.spyOn(global, "fetch").mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "## Photosynthesis\n\n- Uses light\n- Makes food\n\n`chlorophyll`",
+        }),
+        { status: 200 },
+      ),
+    );
+
+    render(<ChatInterface />);
+
+    await user.type(screen.getByPlaceholderText("Ask away!"), "Explain it");
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+
+    expect(await screen.findByRole("heading", { name: "Photosynthesis" })).toBeInTheDocument();
+    expect(screen.getByRole("list")).toBeInTheDocument();
+    expect(screen.getByText("chlorophyll").tagName).toBe("CODE");
+  });
+
+  it("renders Markdown tables in assistant responses", async () => {
+    const user = userEvent.setup();
+    vi.spyOn(global, "fetch").mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          message: "| Topic | Status |\n| --- | --- |\n| Biology | Ready |",
+        }),
+        { status: 200 },
+      ),
+    );
+
+    render(<ChatInterface />);
+
+    await user.type(screen.getByPlaceholderText("Ask away!"), "Show my status");
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+
+    expect(await screen.findByRole("table")).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: "Topic" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "Ready" })).toBeInTheDocument();
+  });
+
   it("scrolls to the newest conversation content", async () => {
     const user = userEvent.setup();
     vi.spyOn(global, "fetch").mockResolvedValue(

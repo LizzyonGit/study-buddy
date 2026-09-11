@@ -6,5 +6,10 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: "./test/setup.ts",
+    server: {
+      deps: {
+        inline: ["react-markdown"],
+      },
+    },
   },
 });
