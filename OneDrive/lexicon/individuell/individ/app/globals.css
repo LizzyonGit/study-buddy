@@ -345,6 +345,31 @@ h1 {
   text-align: center;
 }
 
+.about-study-buddy {
+  margin: 0 30px 24px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.about-study-buddy summary {
+  padding: 16px 0 8px;
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 700;
+  list-style-position: inside;
+}
+
+.about-study-buddy summary::marker {
+  color: var(--purple-dark);
+}
+
+.about-study-buddy p {
+  max-width: 62ch;
+  margin: 0 0 4px;
+  line-height: 1.55;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -414,6 +439,11 @@ h1 {
   }
 
   .composer {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  .about-study-buddy {
     margin-right: 20px;
     margin-left: 20px;
   }
