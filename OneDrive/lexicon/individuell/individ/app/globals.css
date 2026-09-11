@@ -163,6 +163,93 @@ h1 {
   white-space: pre-wrap;
 }
 
+.message-bubble > :first-child {
+  margin-top: 0;
+}
+
+.message-bubble > :last-child {
+  margin-bottom: 0;
+}
+
+.message-bubble h1,
+.message-bubble h2,
+.message-bubble h3 {
+  margin: 1em 0 0.5em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1em;
+}
+
+.message-bubble p {
+  margin: 0.7em 0;
+}
+
+.message-bubble ul,
+.message-bubble ol {
+  margin: 0.7em 0;
+  padding-left: 1.4em;
+}
+
+.message-bubble li + li {
+  margin-top: 0.35em;
+}
+
+.message-bubble code {
+  padding: 0.12em 0.35em;
+  color: var(--ink);
+  background: oklch(1 0 0 / 0.55);
+  border-radius: 4px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.9em;
+}
+
+.message-bubble pre {
+  overflow-x: auto;
+  padding: 12px 14px;
+  color: white;
+  background: var(--ink);
+  border-radius: 10px;
+}
+
+.message-bubble pre code {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  font-size: 0.9em;
+}
+
+.message-bubble a {
+  color: var(--blue-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.message-bubble blockquote {
+  margin: 0.8em 0;
+  padding-left: 1em;
+  border-left: 3px solid var(--purple-dark);
+  color: var(--muted);
+}
+
+.message-bubble table {
+  width: 100%;
+  margin: 0.8em 0;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+
+.message-bubble th,
+.message-bubble td {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+.message-bubble th {
+  color: var(--ink);
+  background: oklch(1 0 0 / 0.45);
+  font-weight: 700;
+}
+
 .assistant .message-bubble {
   color: var(--ink);
   background: var(--purple);
