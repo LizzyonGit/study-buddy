@@ -193,8 +193,24 @@ h1 {
   list-style-type: disc;
 }
 
+.message-bubble ul ul {
+  list-style-type: circle;
+}
+
+.message-bubble ul ul ul {
+  list-style-type: square;
+}
+
 .message-bubble ol {
   list-style-type: decimal;
+}
+
+.message-bubble ol ol {
+  list-style-type: lower-alpha;
+}
+
+.message-bubble ol ol ol {
+  list-style-type: lower-roman;
 }
 
 .message-bubble li + li {
