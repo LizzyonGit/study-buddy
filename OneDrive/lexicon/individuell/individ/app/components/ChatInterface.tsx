@@ -133,7 +133,10 @@ export default function ChatInterface() {
             onClick={clearConversation}
             disabled={messages.length === 1 || isLoading}
           >
-            Clear
+            <span className="clear-label">Clear</span>
+            <span className="clear-icon" aria-hidden="true">
+              X
+            </span>
           </button>
           {/* Render every stored message with styling based on its role. */}
           {messages.map((message, index) => (
