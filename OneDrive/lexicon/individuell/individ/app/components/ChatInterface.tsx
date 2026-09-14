@@ -174,6 +174,13 @@ export default function ChatInterface() {
           )}
         </div>
 
+        {/* Announce request errors immediately to assistive technology. */}
+        {error && (
+          <p className="error-message" role="alert">
+            {error}
+          </p>
+        )}
+
         {/* The form supports both clicking Send and pressing Enter in the input. */}
         <form className="composer" onSubmit={handleSubmit}>
           <label className="sr-only" htmlFor="message">
@@ -193,12 +200,6 @@ export default function ChatInterface() {
             <span aria-hidden="true">&#8593;</span>
           </button>
         </form>
-        {/* Announce request errors immediately to assistive technology. */}
-        {error && (
-          <p className="error-message" role="alert">
-            {error}
-          </p>
-        )}
         <details className="about-study-buddy">
           <summary>What is Study Buddy?</summary>
           <p>
