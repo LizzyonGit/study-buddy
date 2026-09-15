@@ -4,8 +4,8 @@
 // FormEvent provides the TypeScript type for the form submit event; useState stores changing UI data.
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { AssistantMessage } from "./ChatResponse";
+
 
 // A message has an id for React's list rendering, a role for styling and labels, and visible text.
 type Message = {
@@ -106,6 +106,9 @@ export default function ChatInterface() {
     setError("");
   }
 
+  
+
+
   // Render the chat page, conversation, loading indicator, and message composer.
   return (
     <main className="chat-page">
@@ -154,9 +157,7 @@ export default function ChatInterface() {
               </div>
               <div className="message-bubble">
                 {message.role === "assistant" ? (
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {message.content}
-                  </ReactMarkdown>
+                  <AssistantMessage content={message.content} />
                 ) : (
                   <p>{message.content}</p>
                 )}
