@@ -214,4 +214,29 @@ describe("ChatInterface", () => {
       body: JSON.stringify({ message: "Retry this" }),
     });
   });
+
+  it("sends a new message after an error when the user types one", async () => {
+    const user = userEvent.setup();
+    const fetchMock = vi.spyOn(global, "fetch");
+    fetchMock
+      .mockResolvedValueOnce(new Response(JSON.stringify({ error: "Failed" }), { status: 500 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ message: "New response" }), { status: 200 }));
+
+    render(<ChatInterface />);
+
+    await user.type(screen.getByPlaceholderText("Ask away!"), "Old message");
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+    await screen.findByRole("alert");
+
+    await user.type(screen.getByPlaceholderText("Ask away!"), "New message");
+    expect(screen.getByRole("button", { name: "Send message" })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+
+    expect(await screen.findByText("New response")).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenLastCalledWith("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "New message" }),
+    });
+  });
 });

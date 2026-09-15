@@ -320,8 +320,9 @@ h1 {
 }
 
 .composer button {
-  width: 49px;
-  flex: 0 0 49px;
+  min-width: 49px;
+  flex: 0 0 auto;
+  padding: 0 14px;
   color: white;
   background: var(--blue);
   border: 0;

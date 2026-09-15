@@ -51,7 +51,7 @@ export default function ChatInterface() {
     // Stop the browser from reloading the page during form submission.
     event.preventDefault();
     // Remove leading and trailing whitespace before validating or sending the question.
-    const content = (error ? lastSubmittedMessage : input).trim();
+    const content = (error && !input.trim() ? lastSubmittedMessage : input).trim();
 
     // Ignore blank questions and prevent another request while one is already running.
     if (!content || isLoading) {
@@ -191,13 +191,18 @@ export default function ChatInterface() {
             name="message"
             type="text"
             value={input}
-            onChange={(event) => setInput(event.target.value)}
+            onChange={(event) => {
+              setInput(event.target.value);
+              if (event.target.value.trim()) {
+                setError("");
+              }
+            }}
             placeholder="Ask away!"
             autoComplete="off"
             disabled={isLoading}
           />
           <button type="submit" aria-label={error ? "Try again" : "Send message"} disabled={isLoading}>
-            <span aria-hidden="true">&#8593;</span>
+            {error ? "Try again" : "Send"}
           </button>
         </form>
         <details className="about-study-buddy">
