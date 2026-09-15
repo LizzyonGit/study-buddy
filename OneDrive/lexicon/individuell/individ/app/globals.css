@@ -349,7 +349,7 @@ h1 {
 }
 
 .error-message {
-  margin: 10px 30px 0;
+  margin: 10px 30px 26px;
   padding: 12px 14px;
   color: oklch(0.42 0.19 25);
   background: white;
