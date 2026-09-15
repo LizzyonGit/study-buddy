@@ -209,7 +209,7 @@ export default function ChatInterface() {
           <summary>What is Study Buddy?</summary>
           <p>
             Study Buddy is an AI chatbot which you can ask anything. To clear
-            the messages, click Clear or X on mobile phones, and start from
+            the messages, click Clear or X, and start from
             scratch again! No data will be stored.
           </p>
         </details>
