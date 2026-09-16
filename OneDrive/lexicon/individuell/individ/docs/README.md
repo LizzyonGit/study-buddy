@@ -104,6 +104,7 @@ Study Buddy is an AI chatbot to help students study. Students can ask anything a
 ## Features
 
 - 🔎 Ask questions and get a response
+- Scroll to response automatically.
 - 🎬 Clear the conversation
 - 📱 Responsive design
 
@@ -220,6 +221,7 @@ When the user sends a message.
 2. There is an API-fetch.
 3. The API response is converted to a message.
 4. The message is rendered as a response component.
+5. The page scrolls down to the start of the response message.
 
 
 
@@ -328,8 +330,8 @@ npm run build
 
 **Lizzy van Rhijn**
 
-- GitHub: [@anna](https://github.com/anna)
-- LinkedIn: [Anna Andersson](https://linkedin.com/)
+- GitHub: [@lizzy](https://github.com/LizzyonGit)
+- LinkedIn: [Lizzy van Rhijn](https://www.linkedin.com/in/lizzy-v-312528321/)
 
 
 
@@ -340,8 +342,9 @@ npm run build
 
 ## Credits
 
-- Icons from [Font Awesome](https://fontawesome.com/)
-- Movie data from [TMDB](https://www.themoviedb.org/)
-- Design inspiration from ...
-```
+- Favicon and logo from [Canva](https://www.canva.com/)
+- Responses from Groq [Groq](https://groq.com/)
+
+
+
 
