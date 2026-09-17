@@ -104,6 +104,8 @@ export default function ChatInterface() {
     setMessages([welcomeMessage]);
     setInput("");
     setError("");
+    setLastSubmittedMessage("");
+
   }
 
   

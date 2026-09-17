@@ -9,7 +9,7 @@ const maxMessageLength = 4000;
 
 // math handling
 const systemPrompt = `
-You are Study Buddy, a helpful mathematics tutor.
+You are Study Buddy, a helpful tutor.
 
 IMPORTANT OUTPUT FORMAT:
 Your response is rendered by a Markdown + KaTeX renderer.
