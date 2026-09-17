@@ -8,7 +8,7 @@ Study Buddy is an AI chatbot to help students study. Students can ask anything a
 
 
 
-![Screenshot Study Buddy](./screenshot.png)
+![Screenshot Study Buddy](individ/docs/screenshot.png)
 
 
 
@@ -22,7 +22,7 @@ Study Buddy is an AI chatbot to help students study. Students can ask anything a
 ## Live Demo
 
 👉 [Testa applikationen](https://study-buddy-veip-j6dkw1mzs-lizzy-on-git.vercel.app/)
-```
+
 
 ---
 
@@ -106,7 +106,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 
-```md
+
 ## Environment Variables
 
 Create your local environment file:
@@ -192,18 +192,18 @@ The Project uses Groq API to get a response from the chatbot.
 
 
 
-```md
+
 ## Testing
 
 Run tests with:
+```md
 npm test
 npx playwright test
 ```
 
 
-
 The project uses Vitest and Playwright for automated tests.
-```
+
 
 ---
 
@@ -214,9 +214,9 @@ The project uses Vitest and Playwright for automated tests.
 
 Check the code with ESLint:
 
-
+```md
 npm run lint
-
+```
 
 
 ---
@@ -225,7 +225,7 @@ npm run lint
 
 
 
-```md
+
 ## Build
 
 ```bash
