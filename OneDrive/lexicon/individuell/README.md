@@ -258,7 +258,7 @@ npm run build
 - Mathematical responses do not show correctly.
 - Too long responses will be cut off. There should be a button to make the response limit higher for the particular API call one time.
 - Too long user message does not giva an appropriate error message. It should say it is too long.
-
+- Safari is currently not supported.
 ---
 
 
